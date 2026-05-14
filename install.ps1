@@ -16,12 +16,12 @@ if (Test-Path $VbsFile) {
     Copy-Item -Path $VbsFile -Destination $TargetPath -Force
     Write-Host "Copied $VbsFile to $TargetDir" -ForegroundColor Green
 } else {
-    Write-Error "Could not find $VbsFile in the current directory. Make sure you run this script from the repository folder."
+    Write-Error "Could not find $VbsFile in the current directory."
     Exit
 }
 
-# 4. Create Windows Registry structure for the 'doi:' custom URI protocol
-$RegistryPath = "HKCR:\doi"
+# 4. Create Windows Registry structure using the universal Registry provider path
+$RegistryPath = "Registry::HKEY_CLASSES_ROOT\doi"
 $CommandPath = "$RegistryPath\shell\open\command"
 
 # Build main key
@@ -35,3 +35,4 @@ Set-Item -Path $CommandPath -Value $ExecString
 
 Write-Host "Successfully registered 'doi:' protocol in Windows Registry!" -ForegroundColor Green
 Write-Host "Configuration complete." -ForegroundColor Cyan
+
