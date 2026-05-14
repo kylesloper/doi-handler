@@ -4,14 +4,17 @@ If args.Count = 0 Then WScript.Quit
 Dim rawUrl, cleanUrl
 rawUrl = args(0)
 
-' Strip away the custom protocol trigger prefix
+' 1. Standardise incoming data by stripping the protocol trigger prefix
 cleanUrl = Replace(rawUrl, "doi:", "")
 
-' Check if Obsidian or the text already provided a full URL layout
-If InStr(1, cleanUrl, "doi.org", vbTextCompare) > 0 Then
-    ' If it already contains doi.org, launch it directly
-    CreateObject("WScript.Shell").Run """" & cleanUrl & """"
-Else
-    ' If it is just the raw numeric string, attach the resolver URL path
-    CreateObject("WScript.Shell").Run "https://doi.org" & cleanUrl
-End If
+' 2. Handle redundant URL fragments left behind by custom app formats
+' (Transforms anomalies like "https//doi.org" or double prefixes into a clean string)
+cleanUrl = Replace(cleanUrl, "https://doi.org/", "")
+cleanUrl = Replace(cleanUrl, "http://doi.org", "")
+cleanUrl = Replace(cleanUrl, "doi.org/", "")
+
+' 3. Safely launch the final formatted target URL in your system default browser
+Dim finalTarget
+finalTarget = "https://doi.org/" & cleanUrl
+
+CreateObject("WScript.Shell").Run """" & finalTarget & """"
