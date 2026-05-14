@@ -4,6 +4,11 @@ A lightweight Windows utility that automatically intercepts `doi:10.xxx` or `doi
 
 ## Installation
 
+### Executable
+1. Download `.exe` file from Releases page and install
+
+### Manual
+
 1. Download or clone this repository to your computer.
 2. Open **PowerShell as an Administrator** (Right-click -> *Run as administrator*).
 3. Navigate to the folder containing these files using `cd`.
