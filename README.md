@@ -5,7 +5,7 @@ A lightweight Windows utility that automatically intercepts `doi:10.xxx` or `doi
 ## Installation
 
 ### Executable
-1. Download `.exe` file from Releases page and install
+1. Download `.exe` file from Releases page and run as an administrator
 
 ### Manual
 
